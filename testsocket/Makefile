@@ -1,2 +1,2 @@
-tcpserver:main.c
-	g++ main.c -o tcpserver -pthread -std=c++11
+tcpserver:main.c XTcp.cpp XTcp.cpp
+	g++ main.c XTcp.cpp -o tcpserver -pthread -std=c++11
