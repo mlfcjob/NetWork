@@ -1,10 +1,16 @@
-#pragma once
+#ifndef TCP_H
+#define TCP_H
 
+#ifdef _WIN32
 #ifdef XSOCKET_EXPORTS
 #define XSOCKET_API __declspec(dllexport)
 #else
 #define XSOCKET_API __declspec(dllimport)
 #endif
+#else
+#define XSOCKET_API 
+#endif
+
 
 #include <string>
 
@@ -24,4 +30,6 @@ public:
 	unsigned short port = 0;
 	char ip[16];
 };
+
+#endif
 

@@ -14,7 +14,7 @@ public:
 
 			if (strstr(buf, "quit") != NULL)
 			{
-				char *re = "quit success\n";
+				const char *re = "quit success\n";
 				client.Send(re, strlen(re) + 1);
 				break;
 			}
