@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xsocket", "xsocket.vcxproj", "{8818FC37-944D-4B81-8A50-A3928B837661}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tcpserver", "..\tcpserver\tcpserver.vcxproj", "{2FA7133F-ABF9-40F6-97EF-E220ADAF15FD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8818FC37-944D-4B81-8A50-A3928B837661} = {8818FC37-944D-4B81-8A50-A3928B837661}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8818FC37-944D-4B81-8A50-A3928B837661}.Debug|x64.ActiveCfg = Debug|x64
+		{8818FC37-944D-4B81-8A50-A3928B837661}.Debug|x64.Build.0 = Debug|x64
+		{8818FC37-944D-4B81-8A50-A3928B837661}.Debug|x86.ActiveCfg = Debug|Win32
+		{8818FC37-944D-4B81-8A50-A3928B837661}.Debug|x86.Build.0 = Debug|Win32
+		{8818FC37-944D-4B81-8A50-A3928B837661}.Release|x64.ActiveCfg = Release|x64
+		{8818FC37-944D-4B81-8A50-A3928B837661}.Release|x64.Build.0 = Release|x64
+		{8818FC37-944D-4B81-8A50-A3928B837661}.Release|x86.ActiveCfg = Release|Win32
+		{8818FC37-944D-4B81-8A50-A3928B837661}.Release|x86.Build.0 = Release|Win32
+		{2FA7133F-ABF9-40F6-97EF-E220ADAF15FD}.Debug|x64.ActiveCfg = Debug|x64
+		{2FA7133F-ABF9-40F6-97EF-E220ADAF15FD}.Debug|x64.Build.0 = Debug|x64
+		{2FA7133F-ABF9-40F6-97EF-E220ADAF15FD}.Debug|x86.ActiveCfg = Debug|Win32
+		{2FA7133F-ABF9-40F6-97EF-E220ADAF15FD}.Debug|x86.Build.0 = Debug|Win32
+		{2FA7133F-ABF9-40F6-97EF-E220ADAF15FD}.Release|x64.ActiveCfg = Release|x64
+		{2FA7133F-ABF9-40F6-97EF-E220ADAF15FD}.Release|x64.Build.0 = Release|x64
+		{2FA7133F-ABF9-40F6-97EF-E220ADAF15FD}.Release|x86.ActiveCfg = Release|Win32
+		{2FA7133F-ABF9-40F6-97EF-E220ADAF15FD}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
