@@ -111,3 +111,21 @@ int XTcp::Send(const char *buf, int sendsize)
 XTcp::~XTcp()
 {
 }
+
+bool XTcp::Connect(const char *ip, unsigned short port)
+{
+	if (sock <= 0) CreateSocket();
+
+	sockaddr_in saddr;
+	saddr.sin_family = AF_INET;
+	saddr.sin_port = htons(port);
+	saddr.sin_addr.s_addr = inet_addr(ip);
+
+	if ((connect(sock, (sockaddr *)&saddr, sizeof(saddr))) != 0) {
+		printf("connect %s:%d failed: %s.\n", ip, port, strerror(errno));
+		return false;
+	}
+
+	printf("connect success.\n");
+	return true;
+}
