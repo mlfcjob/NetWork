@@ -9,6 +9,7 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <unistd.h>
+#include <fcntl.h>
 #define closesocket close
 #endif
 
@@ -127,5 +128,38 @@ bool XTcp::Connect(const char *ip, unsigned short port)
 	}
 
 	printf("connect success.\n");
+	return true;
+}
+
+
+bool XTcp::SetBlock(bool isblock)
+{
+	if (sock <= 0) return false;
+
+#ifdef _WIN32
+	unsigned long ul = 0;   // 0: block 1:unblock
+
+	if (!isblock) {
+		ul = 1;
+	}
+	ioctlsocket(sock, FIONBIO, &ul);
+#else
+	int flags = fcntl(sock, F_GETFL, 0);
+	if (flags < 0) {
+		return false;
+	}
+
+	if (isblock) {
+		flags = flags & ~O_NONBLOCK;
+	}
+	else {
+		flags = flags | O_NONBLOCK;
+	}
+
+	if (fcntl(sock, F_SETFL, flags) != 0) {
+		return false;
+	}
+#endif
+
 	return true;
 }

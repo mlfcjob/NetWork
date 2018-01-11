@@ -5,6 +5,9 @@ int main(int argc, char *argv[])
 {
 	XTcp client;
 
+	client.CreateSocket();
+	client.SetBlock(false);
+
 	client.Connect("192.168.103.137", 8080);
 	client.Send("Client", 6);
 

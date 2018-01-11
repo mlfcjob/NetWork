@@ -25,6 +25,8 @@ public:
 	int Send(const char *buf, int sendsize);
 	bool Connect(const char *ip, unsigned short port);
 
+	bool SetBlock(bool isblock);
+
 	XTcp();
 	virtual ~XTcp();
 	int sock = 0;
