@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
 	client.CreateSocket();
 	client.SetBlock(false);
 
-	client.Connect("192.168.103.137", 8080);
+	client.Connect("192.168.103.137", 8080, 3000);
 	client.Send("Client", 6);
 
 	char buf[1024] = {0};

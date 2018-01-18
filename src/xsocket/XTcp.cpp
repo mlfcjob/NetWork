@@ -113,7 +113,7 @@ XTcp::~XTcp()
 {
 }
 
-bool XTcp::Connect(const char *ip, unsigned short port)
+bool XTcp::Connect(const char *ip, unsigned short port, int timeoutms)
 {
 	if (sock <= 0) CreateSocket();
 
@@ -121,12 +121,23 @@ bool XTcp::Connect(const char *ip, unsigned short port)
 	saddr.sin_family = AF_INET;
 	saddr.sin_port = htons(port);
 	saddr.sin_addr.s_addr = inet_addr(ip);
+	SetBlock(false);
+	fd_set set;  //文件句柄数组
 
 	if ((connect(sock, (sockaddr *)&saddr, sizeof(saddr))) != 0) {
-		printf("connect %s:%d failed: %s.\n", ip, port, strerror(errno));
-		return false;
+		FD_ZERO(&set);
+		FD_SET(sock, &set);
+		timeval tm;
+		tm.tv_sec = 0;
+		tm.tv_usec = timeoutms * 1000;
+		if (select(sock + 1, (fd_set*)0, &set, 0, &tm) <= 0) {
+			printf("connected timout or error!.\n");
+			printf("connect %s:%d failed: %s.\n", ip, port, strerror(errno));
+			return false;
+		}
 	}
 
+	SetBlock(true);
 	printf("connect success.\n");
 	return true;
 }

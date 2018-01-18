@@ -23,7 +23,7 @@ public:
 	void Close();
 	int Recv(char *buf, int bufsize);
 	int Send(const char *buf, int sendsize);
-	bool Connect(const char *ip, unsigned short port);
+	bool Connect(const char *ip, unsigned short port, int timeoutms=1000);
 
 	bool SetBlock(bool isblock);
 
