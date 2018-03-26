@@ -27,7 +27,7 @@ public:
 			printf("==========recv======\n%s=================\n", buf);
 
 
-			//GET / HTTP/1.1
+			//GET /index.php?id=1&name=mlf HTTP/1.1
 			//Host: 192.168.103.137:81
 			//Connection: keep-alive
 			//Cache-Control: max-age=0
@@ -38,7 +38,12 @@ public:
 			//Accept-Language: zh-CN,zh;q=0.8
 
 			string src = buf;
-			string pattern = "^([A-Z]+) (.+) HTTP/1";
+
+			// /  /index.html /ff/index.php
+
+
+			//string pattern = "^([A-Z]+) /([a-zA-Z0-9]*([.].*)?) HTTP/1";
+			string pattern = "^([A-Z]+) /([a-zA-Z0-9]*)([.][a-zA-Z]*)?)?(.*) HTTP/1";
 			regex r(pattern);
 			smatch mas;
 			regex_search(src, mas, r);
@@ -50,10 +55,16 @@ public:
 
 
 			string type = mas[1];
-			string path = mas[2];
-			printf("type:%s.\n", type.c_str());
-			printf("path:%s.\n", path.c_str());
+			string path = "/";
+			path += mas[2];
+			string filetype = mas[3];
+			string query = mas[4];
+			if (filetype.size() > 0)
+				filetype = filetype.substr(1, filetype.size() - 1);
+
+			printf("type:[%s], path:[%s], fileytpe:[%s], query:[] \n", type.c_str(), path.c_str(), filetype.c_str());
 			if (type != "GET") {
+				printf("Not Get!!!!!.\n");
 				Close();
 				return;
 			}
@@ -66,6 +77,34 @@ public:
 
 			string filepath = "www";
 			filepath += filename;
+
+			// php-cgi www/index.php > www/index.php.html
+			// php-cgi www/index.php id=1 name=mlf > www/index.php.html
+			if (filetype == "php")
+			{
+				string cmd = "php-cgi ";
+				cmd += filepath;
+				cmd += " ";
+
+
+				// query: id=1&name=mlf ===> id=1 name=mlf
+				for (int i = 0; i < query.size(); i++)
+				{
+					if (query[i] == '&') query[i] = ' ';
+				}
+
+				cmd += query;
+
+				cmd += " > ";
+				filepath += ".html";
+				cmd += filepath;
+
+				printf("%s\n", cmd.c_str());
+				system(cmd.c_str());
+
+			}
+
+
 			FILE *fp = fopen(filepath.c_str(), "rb");
 			if (fp == NULL)
 			{
@@ -78,6 +117,23 @@ public:
 			int filesize = ftell(fp);
 			fseek(fp, 0, 0);
 			printf("file size is %d\n", filesize);
+
+			if (filetype == "php") 
+			{
+				char c = 0;
+				int headsize = 0;
+				while (fread(&c, 1, 1, fp) > 0) {
+					if (c == '\r')
+					{
+						fseek(fp, 3, SEEK_CUR);
+						headsize += 3;
+						break;
+					}
+				}
+
+				filesize = filesize - headsize;
+			}
+
 
 			//回应http GET请求
 			// msg header
