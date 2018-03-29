@@ -15,28 +15,8 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="server.cpp">
+    <ClCompile Include="udpclient.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="XHttpserver.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="XHttpClient.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="XHttpResponse.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="XHttpserver.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="XHttpClient.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="XHttpResponse.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
