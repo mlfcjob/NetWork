@@ -149,6 +149,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="xsocket.h" />
     <ClInclude Include="XTcp.h" />
+    <ClInclude Include="XUdp.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -173,6 +174,7 @@
     </ClCompile>
     <ClCompile Include="xsocket.cpp" />
     <ClCompile Include="XTcp.cpp" />
+    <ClCompile Include="XUdp.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
